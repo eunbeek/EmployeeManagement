@@ -1,9 +1,4 @@
-﻿// **************************************************
-// WEB524 Project Template V1 == b9210814-4f17-4492-a60c-272aa5dc9699
-// Do not change this header.
-// **************************************************
-
-using AutoMapper;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +18,10 @@ namespace MyFirstWebApp.Controllers
 
         public Manager()
         {
-            // If necessary, add more constructor code here...
 
             // Configure the AutoMapper components
             var config = new MapperConfiguration(cfg =>
             {
-                // Define the mappings below, for example...
-                // cfg.CreateMap<SourceType, DestinationType>();
-                // cfg.CreateMap<Employee, EmployeeBase>();
                 cfg.CreateMap<Customer, CustomerBaseViewModel>();
                 cfg.CreateMap<CustomerAddViewModel, Customer>();
                 cfg.CreateMap<CustomerBaseViewModel, CustomerEditContactFormViewModel>();
@@ -38,18 +29,12 @@ namespace MyFirstWebApp.Controllers
 
             mapper = config.CreateMapper();
 
-            // Turn off the Entity Framework (EF) proxy creation features
-            // We do NOT want the EF to track changes - we'll do that ourselves
             ds.Configuration.ProxyCreationEnabled = false;
 
-            // Also, turn off lazy loading...
-            // We want to retain control over fetching related objects
+
             ds.Configuration.LazyLoadingEnabled = false;
         }
 
-        // Add your methods and call them from controllers.  Use the suggested naming convention.
-        // Ensure that your methods accept and deliver ONLY view model objects and collections.
-        // When working with collections, the return type is almost always IEnumerable<T>.
 
         public IEnumerable<CustomerBaseViewModel> CustomerGetAll()
         {

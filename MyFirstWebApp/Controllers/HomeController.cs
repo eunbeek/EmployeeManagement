@@ -13,7 +13,7 @@ namespace MyFirstWebApp.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return Redirect("/Customer/Index");
         }
 
         public ActionResult About()

@@ -74,11 +74,6 @@ namespace MyFirstWebApp.Controllers
                 return HttpNotFound();
             else
             {
-                // Create and configure an "edit form"
-                // Notice that obj is a CustomerBaseViewModel object so
-                // we must map it to a CustomerEditContactFormViewModel object
-                // Notice that we can use AutoMapper anywhere,
-                // and not just in the Manager class.
                 var formObj = m.mapper.Map<CustomerBaseViewModel, CustomerEditContactFormViewModel>(obj);
                 return View(formObj);
             }
@@ -91,7 +86,6 @@ namespace MyFirstWebApp.Controllers
             // Validate the input
             if (!ModelState.IsValid)
             {
-                // Our "version 1" approach is to display the "edit form" again
                 return RedirectToAction("Edit", new { id = model.CustomerId });
             }
             if (id.GetValueOrDefault() != model.CustomerId)
@@ -103,8 +97,6 @@ namespace MyFirstWebApp.Controllers
             var editedItem = m.CustomerEditContactInfo(model);
             if (editedItem == null)
             {
-                // There was a problem updating the object
-                // Our "version 1" approach is to display the "edit form" again
                 return RedirectToAction("Edit", new { id = model.CustomerId });
             }
             else
@@ -120,7 +112,6 @@ namespace MyFirstWebApp.Controllers
             var itemToDelete = m.CustomerGetById(id.GetValueOrDefault());
             if (itemToDelete == null)
             {
-                // Don't leak info about the delete attempt
                 // Simply redirect
                 return RedirectToAction("Index");
             }
@@ -133,10 +124,7 @@ namespace MyFirstWebApp.Controllers
         public ActionResult Delete(int? id, FormCollection collection)
         {
             var result = m.CustomerDelete(id.GetValueOrDefault());
-            // "result" will be true or false
-            // We probably won't do much with the result, because
-            // we don't want to leak info about the delete attempt
-            // In the end, we should just redirect to the list view
+
             return RedirectToAction("Index");
         }
     }
